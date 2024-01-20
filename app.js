@@ -14,9 +14,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-// mongoose.connect("mongodb://localhost:27017/TodoDB");
 mongoose.connect(process.env.MONGO_URI);
-// mongoose.connect("mongodb+srv://admin-utsav:1234567u@cluster0.qdjscws.mongodb.net/todolistDB");
 
 var items = [];
 var itemsId = [];
@@ -73,7 +71,7 @@ async function extractDataNewList(ParamModel, paramListName) {
 }
 
 app.get("/", async function (req, res) {
-  console.log("in get")
+  // console.log("in get")
 
   await extractData(Item);
 
@@ -89,7 +87,7 @@ app.get("/", async function (req, res) {
 });
 
 app.get("/:paramList", async function (req, resp) {
-  console.log("in get param")
+  // console.log("in get param")
 
   listTitle = _.capitalize(req.params.paramList);
 
@@ -115,7 +113,7 @@ app.get("/:paramList", async function (req, resp) {
 app.get('/favicon.ico', (req, res) => res.status(204));
 
 app.post("/", async function (req, res) {
-  console.log("in post")
+  // console.log("in post")
   const item = req.body.newItem;
 
   const newItem = new Item({
@@ -141,7 +139,7 @@ app.post("/", async function (req, res) {
 });
 
 app.post("/delete", async function (req, resp) {
-  console.log("in delete");
+  // console.log("in delete");
 
   const deletedItemID = req.body.checkboxOn
   const deletedItemListTitle = req.body.deletedListTitle;
@@ -167,5 +165,5 @@ app.post("/delete", async function (req, resp) {
 });
 
 app.listen(PORT, function () {
-  console.log("Server started on port 3000");
+  console.log("Server started on port: "+ PORT);
 });
