@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const date = require(__dirname + "/date.js");
@@ -13,7 +15,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // mongoose.connect("mongodb://localhost:27017/TodoDB");
-mongoose.connect("mongodb+srv://admin-utsav:1234567u@cluster0.qdjscws.mongodb.net/todolistDB");
+mongoose.connect(process.env.MONGO_URI);
+// mongoose.connect("mongodb+srv://admin-utsav:1234567u@cluster0.qdjscws.mongodb.net/todolistDB");
 
 var items = [];
 var itemsId = [];
